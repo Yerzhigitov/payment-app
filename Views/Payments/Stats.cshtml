@@ -1,0 +1,51 @@
+@model PaymentApp.DTOs.PaymentStatsDto
+
+@{
+    ViewData["Title"] = "Статистика";
+}
+
+<h1 class="page-title">Статистика платежей</h1>
+<p class="page-subtitle">Общая информация и агрегация платежей по дням.</p>
+
+<div class="stats-grid">
+    <div class="stat-box">
+        <div class="stat-label">Общая сумма платежей</div>
+        <div class="stat-value">@Model.TotalAmount</div>
+    </div>
+
+    <div class="stat-box">
+        <div class="stat-label">Количество платежей</div>
+        <div class="stat-value">@Model.TotalCount</div>
+    </div>
+</div>
+
+@if (Model.DailyStats == null || !Model.DailyStats.Any())
+{
+    <div class="empty-box">
+        Пока нет данных для статистики.
+    </div>
+}
+else
+{
+    <div class="table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Количество платежей</th>
+                    <th>Сумма за день</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model.DailyStats)
+                {
+                    <tr>
+                        <td>@d.Date</td>
+                        <td>@d.Count</td>
+                        <td>@d.TotalAmount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

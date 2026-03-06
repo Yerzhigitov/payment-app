@@ -1,0 +1,40 @@
+@model List<PaymentApp.Models.Payment>
+
+@{
+    ViewData["Title"] = "История платежей";
+}
+
+<h2>История платежей</h2>
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Аккаунт</th>
+            <th>Email</th>
+            <th>Сумма</th>
+            <th>Валюта</th>
+            <th>Статус</th>
+            <th>Комментарий</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.CreatedAt.ToLocalTime()</td>
+            <td>@p.Account</td>
+            <td>@p.Email</td>
+            <td>@p.Amount</td>
+            <td>@p.Currency</td>
+            <td>@p.Status</td>
+            <td>@p.Comment</td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>
